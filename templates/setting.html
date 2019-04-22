@@ -1,0 +1,104 @@
+{% extends "layout.html" %}
+
+{% block title %} Setting {% endblock %}
+
+{% block body %}
+    <nav class="navbar navbar-dark bg-dark">
+        <a href="#" class="navbar-brand ">Reminder</a>
+        <ul class="navbar nav mr-auto">
+            <li class="nav-item">
+                <a href="{{ url_for('dashboard') }} " class="nav-link">Dashboard</a>
+            </li>
+        </ul>
+        <ul class="navbar nav">
+            <li class="nav-item">
+                <a href="{{url_for('setting')}}" class="nav-link">Setting</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{url_for('logout') }} " class="nav-link">Log-Out</a>
+            </li>
+        </ul>
+        
+    </nav>
+
+    <div class="registration-container">
+        <h1 class="display-1 login-title">Setting</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert{{ category }}"> {{ message }} </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('setting') }} " method="POST">
+        <div class="form-group" >
+            <label for="email" >Email: </label>
+            <input type="email" name="email" id="email" class="form-control-plaintext setting" value="{{ user.email }}" readonly required>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="fname">First Name: </label>
+                    <input type="text" name="fname" value="{{user.fname}} " id="fname" class="form-control" required>
+                </div>
+            </div>
+            <div class="col">
+                <div class="col">
+                    <div class="form-group">
+                            <label for="fname">Last Name: </label>
+                            <input type="text" name="lname" value="{{user.lname}}" id="lname" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="password">New Password: </label>
+            <input type="password" name="password" id="password" class="form-control" value="{{user.password}}" minlength="6" required>
+        </div>
+
+        <div class="form-group">
+            <label for="cpassword">Confirm Password: </label>
+            <input type="password" name="cpassword" id="cpassword" class="form-control" value="{{user.password}}" required>
+        </div>
+
+        <div class="row justify-content-around">
+            <div class="col-4">
+                <div class="input-group myGenderRegister">
+                    <div class="input-group-prepend">
+                        <label for="gender" class="input-group-text">Gender</label>
+                    </div>
+                    <select name="gender" id="gender" class="custom-select"  required>
+                        {% if user.gender == "male" %}
+                            <option selected value="male">Male</option>
+                            <option value="female">Female</option>
+                        {% elif user.gender == "female" %}
+                        <option  value="male">Male</option>
+                            <option selected value="female">Female</option>
+                        {%  endif %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="input-group" >
+                    <div class="input-group-prepend">
+                        <label for="age" class="input-group-text myAge"  required>Age</label>
+                    </div>
+                    <input type="number" name="age" id="age" placeholder="Age" class="myAge" min="0" max="100" value="{{user.age}}" required>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="btndiv form-group">
+            <button type="submit" class="btn btn-success btn-login">Update Profile</button>
+        </div>       
+    </form>
+        
+</div>
+   
+
+{% endblock %}

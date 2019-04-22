@@ -1,0 +1,123 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url(/static/img/bg.jpg);
+  background-size: cover;
+  font-size: 1.3rem;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+.btndiv {
+  text-align: center;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.myGenderRegister {
+  width: 200px;
+}
+
+.btn-login {
+  font-size: 1.3rem;
+  width: 300px;
+}
+
+.login-container {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.registration-container {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.display-1 {
+  text-align: center;
+}
+
+.myContainer {
+  margin-top: 2rem;
+}
+
+.myAge {
+  text-align: center;
+  width: 100px;
+}
+
+form {
+  margin-top: 20px;
+}
+
+.login-title {
+  color: #1EA3F0;
+  font-size: 5vh;
+  font-variant: small-caps;
+  text-shadow: 1px 1px 2px black;
+}
+
+th {
+  text-align: center;
+}
+
+td {
+  line-height: 1.5;
+}
+
+td.MyTable-btn {
+  vertical-align: middle;
+}
+
+th.MyTable-btn {
+  vertical-align: middle;
+  text-align: center;
+}
+
+nav {
+  margin-bottom: 50px;
+}
+
+caption {
+  caption-side: top;
+}
+
+.add-task {
+  display: none;
+}
+
+.add-task-active {
+  display: table-row;
+}
+
+.alert {
+  text-align: center;
+}
+
+.reminder-table {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.input-task {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.input-size {
+  font-size: 1.5rem;
+}
+
+.setting {
+  padding-left: 20px;
+  color: #1EA3F0;
+}
+
+.done {
+  text-decoration-line: line-through;
+}
+
+/*# sourceMappingURL=style.css.map */

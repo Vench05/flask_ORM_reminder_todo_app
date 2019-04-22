@@ -1,0 +1,95 @@
+{% extends 'layout.html' %}
+
+{% block title %} Reminder {% endblock %}
+
+{% block body %}
+    <nav class="navbar navbar-dark bg-dark">
+        <a href="#" class="navbar-brand ">Reminder</a>
+        <ul class="navbar nav mr-auto">
+            <li class="nav-item">
+                <a href="{{ url_for('dashboard') }} " class="nav-link">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" onclick="addTask();" class="nav-link">Add Task</a>
+            </li>
+        </ul>
+        <ul class="navbar nav">
+            <li class="nav-item">
+                <a href="{{url_for('setting')}}" class="nav-link">Setting</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url_for('logout') }} " class="nav-link">Log-Out</a>
+            </li>
+        </ul>
+           
+    </nav>
+
+    <table class="table table-striped table-hover table-responsive-sm reminder-table">
+    <caption>{{ title.title }} </caption>
+        <tr>
+            <th>No#</th>
+            <th width="70%">Task</th>
+            <th width="12%"></th>
+            <th width="12%">Options</th>
+            <th width="12%"></th>
+            <th width="12%"></th>
+        </tr>
+
+        <tr id="add-taskID" class="add-task">
+            <td>?</td>
+            <form action="{{ url_for('task', title_id=title.id) }}" method="POST">
+                <input type="hidden" name="title_id" value="{{title.id}}">
+                <td> <input type="text" required minlength="3" name="task" id="focus" class="form-control input-task" placeholder="Add your Task here" autocomplete="off"> </td>
+                <td class="MyTable-btn"><button type="submit" class="btn btn-primary" name="addTask">Confirm</button></td>
+            </form>
+            <td class="MyTable-btn"><button class="btn btn-danger" onclick="addTask();">Cancel</button></td>
+        </tr>
+
+        {% for task in tasks %}
+        <tr>
+            <form action="{{ url_for('task', title_id=title.id) }} " method="POST">
+                <td class="MyTable-btn">{{loop.index}} </td>
+                {% if task.done == 1 %}
+                    <td class="done"> {{task.task}} </td>
+                {% else %}
+                <td class=""> {{task.task}} </td>
+                {% endif %}
+                <input type="hidden" name="loop-index" id="num" value="{{loop.index}}">
+                <input type="hidden" name="task_id" value="{{task.id}}">
+                <input type="hidden" name="task" class='task-name' value="{{task.task}}">
+                <td class="MyTable-btn"><button class="btn btn-danger" type="submit" name="delete">Delete</button></td>   
+                <td class="MyTable-btn">
+                    <button type="button" class="btn btn-primary" onclick="edit()" data-toggle="modal" data-target="#myOutput{{task.id}} ">Edit</button>
+                </td>
+                <td class="MyTable-btn"><button class="btn btn-primary" type="submit" name="done" value="1">Done</button></td> 
+                <td class="MyTable-btn"><button class="btn btn-danger" type="submit" name="undone" value="0">Undone</button></td> 
+            </form>  
+        </tr>
+        {% endfor %}
+    </table>
+    {% for task in tasks %}
+    <!-- Modal -->
+    <div class="modal fade" id="myOutput{{ task.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit: {{task.task}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ url_for('task', title_id=title.id) }} " method="POST">
+                <div class="modal-body">
+                    <input type="hidden" name="task_id" value="{{task.id}}">
+                    <input type="text" value="{{task.task}} " required minlength="3" name="task" id="focus" class="input-size form-control input-task" placeholder="Add your Task here" autocomplete="off">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" type="submit" name="update" >Save changes</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}

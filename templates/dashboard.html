@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block body %}
+    <nav class="navbar navbar-dark bg-dark">
+        <a href="#" class="navbar-brand ">Reminder</a>
+        <ul class="navbar nav mr-auto">
+            <li class="nav-item">
+                <a href="#" onclick="addReminder();" class="nav-link">Add Reminder</a>
+            </li>
+        </ul>
+        <ul class="navbar nav">
+            <li class="nav-item">
+                <a href="{{url_for('setting')}}" class="nav-link">Setting</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{url_for('logout') }} " class="nav-link">Log-Out</a>
+            </li>
+        </ul>
+           
+    </nav>
+
+    <table class="table table-striped table-hover table-responsive-sm reminder-table">
+    <caption>{{title}} </caption>
+        <tr>
+            <th class="MyTable-btn">No#</th>
+            <th width="60%" class="MyTable-btn">Reminder</th>
+            <th width="18%" class="MyTable-btn">Date Created</th>
+            <th width="12%" class="MyTable-btn" colspan="2">Options</th>
+        </tr>
+
+        <tr id="add-reminderID" class="add-task">
+            <td>?</td>
+            <form action="{{ url_for('dashboard') }} " method="POST">
+                <td> <input type="text" required minlength="3" name="title" id="focus" class="form-control input-task" placeholder="Add your Reminder Title here" autocomplete="off"> </td>
+                <td class="MyTable-btn"><button type="submit" class="btn btn-primary" name="add">Confirm</button></td>
+            </form>
+            <td class="MyTable-btn"><button class="btn btn-danger" onclick="addReminder();" >Cancel</button></td>
+        </tr>
+
+        {% for title in titles %}
+        <tr>
+            <form action="{{ url_for('dashboard') }} " method="POST"></form>
+                <td>{{loop.index}} </td>
+                <td> {{title.title}} </td>
+                <td> <span>{{title.date.strftime('%x')}} </span> </td>
+                <input type="hidden" name="title_id" value="{{title.id}}">
+            <td class="MyTable-btn"><button class="btn btn-primary" type="submit" name="open" onclick="window.location.href='{{ url_for('task', title_id=title.id) }}'" >Open</button></td>     
+            </form>
+            <form action="{{ url_for('dashboard') }} " method="POST">
+                <input type="hidden" name="title_id" value="{{title.id}}">
+                <td class="MyTable-btn"><button class="btn btn-danger" type="submit" name="delete">Delete</button></td> 
+            </form>
+        </tr>
+        {% endfor %}
+        
+    </table>
+
+    
+{% endblock %}

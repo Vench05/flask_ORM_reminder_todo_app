@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %} Log In {% endblock %}
+
+{% block body %}
+<div class="login-container">
+    <h1 class="login-title"> Hello, There! <br> Want to make a REMINDER? <br> sign up now!</h1>
+    {% if message is defined %}
+        <h3 class="alert alert-danger"> {{message}} </h3>
+    {% endif %}
+    {% if good_message is defined %}
+        <h3 class="alert alert-success"> {{good_message}} </h3>
+    {% endif %}
+    <form action="{{ url_for('index') }}" method="post" >
+        <div class="form-group">
+            <label for="email">Email: </label>
+            <input type="text" placeholder="example@example.com" name="email" id="email" class="form-control" autofocus required >
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password: </label>
+            <input type="password" placeholder="Password" name="password" id="password" class="form-control" required>
+        </div>
+
+        <div class="btndiv">
+            <button class="btn btn-success btn-login" type="submit">Log-In</button>
+        </div>
+
+    </form>
+
+    <div class="btndiv">
+        <a href="{{ url_for('registration') }} " >Not a member yet? Sign up here!</a>
+    </div>
+</div>
+    
+{% endblock %}

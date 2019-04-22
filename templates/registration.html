@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block title %} Registration {% endblock %}
+
+{% block body %}
+<div class="registration-container">
+    <h1 class="display-1 login-title">Registration Form</h1>
+    {% if message is defined %}
+        <h3 class="alert alert-danger"> {{message}} </h3>
+    {% endif %}
+    
+    <form action="{{ url_for('registration') }} " method="post">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="fname">First Name: </label>
+                    <input type="text" name="fname" id="fname" class="form-control" autofocus required>
+                </div>
+            </div>
+            <div class="col">
+                <div class="col">
+                    <div class="form-group">
+                            <label for="fname">Last Name: </label>
+                            <input type="text" name="lname" id="lname" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" >
+            <label for="email" >Email: </label>
+            <input type="email" name="email" id="email" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password: </label>
+            <input type="password" name="password" id="password" class="form-control" minlength="6" required>
+        </div>
+
+        <div class="form-group">
+            <label for="cpassword">Confirm Password: </label>
+            <input type="password" name="cpassword" id="cpassword" class="form-control" required>
+        </div>
+
+        <div class="row justify-content-around">
+            <div class="col-4">
+                <div class="input-group myGenderRegister">
+                    <div class="input-group-prepend">
+                        <label for="gender" class="input-group-text">Gender</label>
+                    </div>
+                    <select name="gender" id="gender" class="custom-select" required>
+                        <option disabled selected value="">Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="input-group" >
+                    <div class="input-group-prepend">
+                        <label for="age" class="input-group-text" class="myAge" required>Age</label>
+                    </div>
+                    <input type="number" name="age" id="age" placeholder="Age" class="myAge" min="0" max="100" required>
+                </div>
+            </div>
+        </div>
+        
+        <div class="btndiv form-group">
+            <button type="submit" class="btn btn-success btn-login">Register</button>
+        </div>        
+
+        
+        <div class="btndiv form-group">
+            <a href="{{ url_for('index') }}">Already have an account?</a>
+        </div>
+    </form>
+</div>
+   
+
+{% endblock %}

@@ -44,7 +44,7 @@
             <form action="{{ url_for('dashboard') }} " method="POST"></form>
                 <td>{{loop.index}} </td>
                 <td> {{title.title}} </td>
-                <td> <span>{{title.date.strftime('%x')}} </span> </td>
+                <td> <span>{{title.date.strftime('%Y-%m-%d')}} </span> </td>
                 <input type="hidden" name="title_id" value="{{title.id}}">
             <td class="MyTable-btn"><button class="btn btn-primary" type="submit" name="open" onclick="window.location.href='{{ url_for('task', title_id=title.id) }}'" >Open</button></td>     
             </form>
